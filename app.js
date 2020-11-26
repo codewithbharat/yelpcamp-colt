@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const path = require('path'); 
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campgrounds');
 
 
 const app = express();
-const AtlasUri = "mongodb+srv://bharat:8kxG7adWMxJbq59S@blogapp.snaf8.mongodb.net/<dbname>?retryWrites=true&w=majority"
+const AtlasUri = "mongodb://vs_code:xqM8cy2yJnt019Oi@blogapp-shard-00-00.snaf8.mongodb.net:27017,blogapp-shard-00-01.snaf8.mongodb.net:27017,blogapp-shard-00-02.snaf8.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-69qnok-shard-0&authSource=admin&retryWrites=true&w=majority"
 mongoose.connect( AtlasUri, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
@@ -19,6 +20,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 	console.log('Database connected');
 });
+
+app.engine('ejs',ejsMate);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
