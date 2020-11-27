@@ -30,16 +30,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-	res.render('home')
+	res.render('home', {title:'YelpCamp | Home'});
 });
 
 app.get('/campgrounds', async (req, res) => {
 	const campgrounds = await Campground.find({});
-	res.render('campgrounds/index', {campgrounds: campgrounds });
+	res.render('campgrounds/index', {campgrounds: campgrounds, title: "All Campgrounds" });
 });
 
 app.get('/campgrounds/new', (req, res) => {
-	res.render('campgrounds/new')
+	res.render('campgrounds/new', { title: 'Create New Campground'})
 });
 
 app.post('/campgrounds', async (req, res) => {
@@ -50,12 +50,12 @@ app.post('/campgrounds', async (req, res) => {
 
 app.get('/campgrounds/:id', async (req, res) => {
 	const campground = await Campground.findById(req.params.id);
-	res.render('campgrounds/show', {campground: campground});
+	res.render('campgrounds/show', {campground: campground, title: campground.title });
 });
 
 app.get('/campgrounds/:id/edit', async (req, res) => {
 	const campground = await Campground.findById(req.params.id);
-	res.render('campgrounds/edit', {campground: campground});
+	res.render('campgrounds/edit', {campground: campground, title: `Edit | ${campground.title}`});
 });
 
 app.put('/campgrounds/:id', async (req, res) => {

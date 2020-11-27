@@ -17,6 +17,7 @@
     "mongoose": "^5.10.14"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "reload": "^3.1.1"
   }
 }
