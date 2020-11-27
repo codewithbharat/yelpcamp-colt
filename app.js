@@ -70,6 +70,6 @@ app.delete('/campgrounds/:id', async (req, res) => {
 	res.redirect('/campgrounds');
  });
 
-app.listen(3000, () => {
+app.listen( process.env.PORT || 3000, process.env.IP ,  () => {
 	console.log('server has started listining')
 });
